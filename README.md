@@ -1,1 +1,1 @@
-# Mediming-AI
+# Medimind-AI
