@@ -2,6 +2,35 @@
     "name": "josh",
     "age": "17",
     "sex": "m",
-    "height": "6'1",
-    "weight": "165"
+    "height": "6'1\"",
+    "weight": "`65",
+    "crew_role": "astronaut",
+    "blood_type": "a-",
+    "allergies": [],
+    "chronic_conditions": [],
+    "vital_signs": {
+        "heart_rate": "80",
+        "blood_pressure": "systolic",
+        "oxygen_saturation": "70",
+        "body_temperature": "94",
+        "respiratory_rate": "80",
+        "sleep_hours": "6.5"
+    },
+    "recent_symptoms": [],
+    "medications": [],
+    "vaccinations": [
+        "flu"
+    ],
+    "mission_data": {
+        "current_location": "moon base",
+        "radiation_exposure": "idk",
+        "microgravity_experience_days": "6",
+        "exercise_minutes_per_day": "30"
+    },
+    "preferences": {
+        "preferred_language": "english",
+        "alert_contacts": [],
+        "decision_preference": ""
+    },
+    "alert_contacts": []
 }

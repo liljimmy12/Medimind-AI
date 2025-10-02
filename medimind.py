@@ -94,18 +94,16 @@ elif action == "load":
         print(f"no information found for '{name_to_load}'.")
 #delete a JSON file
 elif action == "delete":
-    name_to_delete = input("enter the name of the user you want to delete: ").lower()
+    name_to_delete = input("Enter the name of the user you want to delete: ").lower()
     file_path = os.path.join(folder_path, f"{name_to_delete}.json")
-
+    
     if os.path.exists(file_path):
-        confirm = input(f"are you sure you want to delete '{name_to_delete}'? type 'yes' to confirm: ").lower()
+        confirm = input(f"Are you sure you want to delete '{name_to_delete}'? Type 'yes' to confirm: ").lower()
         if confirm == "yes":
             os.remove(file_path)
-            print(f"user '{name_to_delete}' has been deleted.")
+            print(f"User '{name_to_delete}' has been deleted.")
         else:
-            print("deletion canceled.")
-    else:
-        print(f"no information found for '{name_to_delete}'.")
+            print("Deletion canceled.")
 #update a JSON file
 elif action == "update":
     name_to_update = input("enter the name of the user you want to update: ").lower()
@@ -116,8 +114,24 @@ elif action == "update":
             user_info = json.load(file)
 
         print("\npress enter to keep current value.")
+
+        
+        def default_value(field):
+            if field in ["allergies", "chronic_conditions", "recent_symptoms", "medications", "vaccinations", "alert_contacts"]:
+                return []
+            elif field in ["vital_signs", "mission_data", "preferences"]:
+                return {}
+            else:
+                return ""
+
         def update_field(field, subfield=None):
+            
+            if field not in user_info:
+                user_info[field] = default_value(field)
+
             if subfield:
+                if subfield not in user_info[field]:
+                    user_info[field][subfield] = ""
                 current_value = user_info[field][subfield]
                 new_value = input(f"{subfield} ({current_value}): ").lower()
                 if new_value:
@@ -138,15 +152,15 @@ elif action == "update":
         for key in ["name", "age", "sex", "height", "weight", "crew_role", "blood_type"]:
             update_field(key)
 
-        
         for key in ["allergies", "chronic_conditions", "recent_symptoms", "medications", "vaccinations", "alert_contacts"]:
             update_field(key)
 
-        
         for subfield in ["heart_rate", "blood_pressure", "oxygen_saturation", "body_temperature", "respiratory_rate", "sleep_hours"]:
             update_field("vital_signs", subfield)
+
         for subfield in ["current_location", "radiation_exposure", "microgravity_experience_days", "exercise_minutes_per_day"]:
             update_field("mission_data", subfield)
+
         for subfield in ["preferred_language", "decision_preference"]:
             update_field("preferences", subfield)
 
@@ -159,5 +173,5 @@ elif action == "update":
 
 
 else:
-    print("invalid action. Please type 'load', 'add', or 'delete'.")
+    print("invalid action. Please type 'load', 'add', 'delete', or 'update'.")
 

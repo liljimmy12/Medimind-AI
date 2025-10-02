@@ -1,0 +1,34 @@
+{
+    "name": "silver",
+    "age": "17",
+    "sex": "m",
+    "height": "6'1",
+    "weight": "150",
+    "crew_role": "pilot",
+    "blood_type": "o",
+    "allergies": [],
+    "chronic_conditions": [],
+    "vital_signs": {
+        "heart_rate": "87",
+        "blood_pressure": "systolic",
+        "oxygen_saturation": "87",
+        "body_temperature": "68",
+        "respiratory_rate": "40",
+        "sleep_hours": "5"
+    },
+    "recent_symptoms": [
+        "shortness of breath"
+    ],
+    "medications": [],
+    "vaccinations": [],
+    "mission_data": {
+        "current_location": "moon base",
+        "radiation_exposure": "n",
+        "microgravity_experience_days": "12",
+        "exercise_minutes_per_day": "120"
+    },
+    "preferences": {
+        "preferred_language": "english",
+        "alert_contacts": []
+    }
+}
