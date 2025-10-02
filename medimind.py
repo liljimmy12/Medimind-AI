@@ -2,7 +2,7 @@
 import os
 import json
 
-folder_path = "/home/meyerj@CSGP.EDU/https:/github.com/liljimmy12/Mediming-AI.git"
+folder_path = "/home/meyerj@CSGP.EDU/Medimind-AI"
 
 name = input("enter your name: ").lower()
 age = input("enter your age: ").lower()
@@ -26,3 +26,14 @@ with open(file_path, "w") as file:
 
 print(f"information saved to {file_path}")
 
+name_to_load = input("Enter the name of the user you want to load: ").lower()
+
+if os.path.exists(file_path):
+    with open(file_path, "r") as file:
+        loaded_info = json.load(file)
+
+    print("\nLoaded user info:")
+    for key, value in loaded_info.items():
+        print(f"{key}: {value}")
+else:
+    print(f"No information found for '{name_to_load}'. Make sure the name is correct.")
