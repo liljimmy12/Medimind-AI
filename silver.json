@@ -29,6 +29,8 @@
     },
     "preferences": {
         "preferred_language": "english",
-        "alert_contacts": []
-    }
+        "alert_contacts": [],
+        "decision_preference": ""
+    },
+    "alert_contacts": []
 }
