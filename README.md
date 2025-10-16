@@ -32,7 +32,7 @@ Save this code in a folder
 
 **3. Adjust Folder Path**                                                                                                                    
 Make sure the variable folder_path matches your system directory:                                                                                                                                                                                                                                                                                                
-ex `folder_path = "/home/meyerj@CSGP.EDU/Medimind-AI"`
+Example: `folder_path = "/home/meyerj@CSGP.EDU/Medimind-AI"`
 
 **4. Run the System**                                                                                                                                                                                                                                                                                                                                             
 `python main.py`
