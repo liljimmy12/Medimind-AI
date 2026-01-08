@@ -84,7 +84,7 @@ def listen_for_wake_word(wake_word="medimind start"):
 class HealthGUI(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("🚀 Medimind-AI Emergency Health Monitor")
+        self.title("Medimind-AI Emergency Health Monitor")
         self.geometry("600x500")
         self.configure(bg="#1a1a1a")
         self.create_widgets()
@@ -105,7 +105,7 @@ class HealthGUI(tk.Tk):
         self.symptoms_entry.pack(pady=5)
 
         # Buttons
-        tk.Button(self, text="🎤 Speak Symptoms Now", bg="#ffcc00", fg="black",
+        tk.Button(self, text="Speak Symptoms Now", bg="#ffcc00", fg="black",
                   command=lambda: threading.Thread(target=self.voice_input).start()).pack(pady=10)
         tk.Button(self, text="Quick Emergency Vitals", bg="#ff4c4c", fg="white",
                   command=self.quick_emergency_input).pack(pady=5)

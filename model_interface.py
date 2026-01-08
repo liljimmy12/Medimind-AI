@@ -1,4 +1,5 @@
 import os
+import json
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 
@@ -109,7 +110,7 @@ def analyze_user_condition(folder_path, user_name):
         "(no drugs, no prescriptions)."
     )
 
-    response = generator(prompt, truncation=True, max_length=400, do_sample=True)[0]["generated_text"]
+    response = generator(prompt, truncation=True, max_length=40,,../////////////////////////???///////////////////////'''0, do_sample=True)[0]["generated_text"]
     print(f"\n=== BioMedLM Crew-Cross Analysis for {user_name} ===\n")
     print(response)
     print("\n" + "="*80 + "\n")
