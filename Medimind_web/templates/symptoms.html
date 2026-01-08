@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Medimind - Symptoms</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #e6f2fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 60px;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.header img {
+    width: 150px;
+    height: 150px;
+    background-color: #0077cc;
+    padding: 20px;
+    border-radius: 50%;
+}
+
+.header h1 {
+    font-size: 70px;
+    color: #0077cc;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+/* CARD */
+.card {
+    background: #ffffff;
+    border-radius: 25px;
+    padding: 60px 50px;
+    width: 650px;
+    max-width: 95%;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.card h2 {
+    margin-bottom: 40px;
+    color: #0077cc;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+/* INPUT & SELECT */
+.card input, .card select {
+    width: 100%;
+    padding: 18px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 18px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.card input:focus, .card select:focus {
+    border-color: #0077cc;
+    box-shadow: 0 0 10px rgba(0, 119, 204, 0.4);
+}
+
+/* BUTTON */
+.card button {
+    width: 100%;
+    padding: 20px;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.card button:hover {
+    background-color: #005fa3;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* RESULT */
+.result {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 15px;
+    background: #f0f9ff;
+    font-size: 18px;
+    color: #333;
+}
+
+/* LOGOUT BUTTON */
+.logout-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    background-color: #ff4d4d;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #cc0000;
+}
+</style>
+</head>
+<body>
+
+<!-- Logout -->
+<button class="logout-btn" id="logoutBtn">Logout</button>
+
+<div class="header">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Medimind Logo">
+    <h1>Medimind</h1>
+</div>
+
+<div class="card">
+    <h2>Enter Your Symptoms</h2>
+    <form method="POST" action="{{ url_for('symptoms') }}">
+        <!-- User can type custom symptoms -->
+        <input type="text" id="customSymptoms" name="customSymptoms" placeholder="Enter your own symptoms...">
+
+        <!-- Dropdown for common symptoms -->
+        <select id="symptomDropdown">
+            <option value="" disabled selected>Select a symptom...</option>
+            <option>Headache</option>
+            <option>Fever</option>
+            <option>Cough</option>
+            <option>Nausea</option>
+            <option>Fatigue</option>
+            <option>Muscle pain</option>
+            <option>Sore throat</option>
+            <option>Shortness of breath</option>
+            <option>Diarrhea</option>
+            <option>Vomiting</option>
+            <option>Runny nose</option>
+            <option>Chills</option>
+            <option>Dizziness</option>
+            <option>Rash</option>
+            <option>Loss of taste or smell</option>
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if result %}
+    <div class="result">{{ result|safe }}</div>
+    {% endif %}
+</div>
+
+<script>
+// Require login
+const savedUser = localStorage.getItem("username");
+const savedPass = localStorage.getItem("password");
+if(!savedUser || !savedPass){
+    alert("You must login first!");
+    window.location.href = "{{ url_for('signup') }}";  // redirect to login/signup
+}
+
+// Logout functionality
+document.getElementById("logoutBtn").addEventListener("click", () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("password");
+    window.location.href = "{{ url_for('signup') }}";
+});
+
+// Append dropdown selection to input field
+const dropdown = document.getElementById("symptomDropdown");
+const inputField = document.getElementById("customSymptoms");
+
+dropdown.addEventListener("change", () => {
+    if(inputField.value.length > 0){
+        inputField.value += ", " + dropdown.value;
+    } else {
+        inputField.value = dropdown.value;
+    }
+    dropdown.selectedIndex = 0; // reset dropdown
+});
+</script>
+</body>
+</html>

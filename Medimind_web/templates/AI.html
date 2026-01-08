@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Symptom Analysis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+    }
+
+    .result {
+      margin-top: 30px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background: #f9f9f9;
+    }
+
+    .loading {
+      color: gray;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Symptom Checker</h1>
+
+  <p>Enter all symptoms you are experiencing:</p>
+
+  <textarea id="symptoms" placeholder="Example: fever, headache, fatigue for 3 days..."></textarea>
+
+  <button onclick="analyzeSymptoms()">Analyze Symptoms</button>
+
+  <p id="status" class="loading"></p>
+
+  <div id="result" class="result" style="display:none;">
+    <h2>AI Assessment</h2>
+    <pre id="diagnosis"></pre>
+  </div>
+
+  <script>
+    async function analyzeSymptoms() {
+      const symptoms = document.getElementById("symptoms").value;
+      if (!symptoms.trim()) return;
+
+      document.getElementById("status").textContent = "Analyzing symptoms...";
+      document.getElementById("result").style.display = "none";
+
+      const response = await fetch("/diagnose", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ symptoms })
+      });
+
+      const data = await response.json();
+
+      document.getElementById("status").textContent = "";
+      document.getElementById("diagnosis").textContent = data.diagnosis;
+      document.getElementById("result").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>

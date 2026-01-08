@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medimind</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Make the form card bigger and centered */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .site-header {
+            background-color: #add8e6;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 20px 40px;
+            gap: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+            width: 100%;
+        }
+
+        .form-card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            width: 400px;
+            max-width: 90%;
+        }
+
+        .form-card h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-card label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        .form-card input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .form-card button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .result-card {
+            margin-top: 30px;
+            padding: 30px;
+            background-color: #e0f7fa;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 400px;
+            max-width: 90%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Medimind Logo" class="logo" width="50">
+    <h1>Medimind</h1>
+</header>
+
+<main class="container">
+    <div class="form-card">
+        <h2>Astronaut Health Check</h2>
+        <form id="healthForm">
+            <label for="username">Create Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your name" required>
+
+            <label for="password">Create Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter a password" required>
+
+            <label for="symptoms">Symptoms (comma-separated):</label>
+            <input type="text" id="symptoms" name="symptoms" placeholder="e.g., headache, nausea">
+
+            <button type="submit">Analyze & Save</button>
+        </form>
+    </div>
+
+    <div class="result-card" id="resultCard" style="display:none;"></div>
+</main>
+
+<script>
+    // Check if user is already saved
+    const savedUser = localStorage.getItem("username");
+    if (savedUser) {
+        document.getElementById("username").value = savedUser;
+    }
+
+    document.getElementById("healthForm").addEventListener("submit", function(e){
+        e.preventDefault();
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const symptoms = document.getElementById("symptoms").value;
+
+        // Save username and password to localStorage (note: for demo only; passwords should be encrypted in real apps)
+        localStorage.setItem("username", username);
+        localStorage.setItem("password", password);
+
+        // Fake analysis result
+        const resultText = `<strong>Hello ${username}!</strong><br>Your symptoms: ${symptoms || "None"}`;
+        const resultCard = document.getElementById("resultCard");
+        resultCard.innerHTML = resultText;
+        resultCard.style.display = "block";
+    });
+</script>
+
+</body>
+</html>
+
